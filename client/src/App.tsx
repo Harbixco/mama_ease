@@ -1,10 +1,15 @@
-export default function App() {
-  return (
-    <>
-      <h1 className="text-8xl font-bold underline text-red-700">
-        {" "}
-        Hello world!{" "}
-      </h1>
-    </>
-  );
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Splash } from "./components";
+
+function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Splash />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
+
+export default App;
