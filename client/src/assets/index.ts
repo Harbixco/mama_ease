@@ -1,3 +1,5 @@
+import logo from "./Images/logo.svg";
+import arrow from "./Images/arrow.svg";
 import slide1 from "./Images/slide1.svg";
 import slide2 from "./Images/slide2.svg";
 import slide3 from "./Images/slide3.svg";
@@ -33,8 +35,16 @@ import slide32 from "./Images/slide32.svg";
 import slide33 from "./Images/slide33.svg";
 import slide34 from "./Images/slide34.svg";
 import slide35 from "./Images/slide35.svg";
+import facebook from "./Images/facebook.svg";
+import google from "./Images/google.svg";
+import twitter from "./Images/twitter.svg";
 
 export {
+  twitter,
+  facebook,
+  google,
+  logo,
+  arrow,
   slide1,
   slide2,
   slide3,
