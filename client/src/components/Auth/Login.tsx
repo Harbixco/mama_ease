@@ -1,74 +1,137 @@
 import { logo } from "../../assets";
 import { Link } from "react-router-dom";
 import { facebook, twitter, google } from "../../assets";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export default function Login() {
-  return (
-    <>
-      <div className="flex flex-col h-screen">
-        <div className="flex flex-col items-center pt-8 pb-4 bg-white">
-          <img src={logo} alt="MamaEase Logo" className="size-12 md:size-20" />
-          <h1 className="text-xl font-bold text-purple-600 pt-5">Log in</h1>
-        </div>
+  // Use Formik and Yup to manage form state and validation
+  const formik = useFormik({
+    // Define initial form values
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    // Define the validation schema using Yup
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required"),
+    }),
+    // Handle form submission
+    onSubmit: (values) => {
+      // Here you would typically handle the login logic, e.g., make an API call
+      alert(JSON.stringify(values, null, 2));
+      console.log("Form submitted with values:", values);
+    },
+  });
 
-        <div className="flex-1 bg-[#9577B5] flex flex-col items-center p-4 md:p-6 space-y-4">
-          <div className="w-full max-w-sm">
+  return (
+    <div className="flex flex-col h-screen">
+      {/* Top Section (White) */}
+      <div className="flex flex-col items-center pt-4 pb-4 bg-white">
+        <img src={logo} alt="MamaEase Logo" className="size-12 md:size-20" />
+        <h1 className="text-xl font-bold text-purple-600 pt-5">Log in</h1>
+      </div>
+
+      {/* Bottom Section (Purple) */}
+      <div className="flex-1 bg-[#9577B5] flex flex-col items-center justify-start py-8 px-6">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="w-full max-w-sm space-y-4"
+        >
+          {/* Email Input */}
+          <div className="relative w-full">
             <input
+              id="email"
+              name="email"
               type="email"
               placeholder="Email"
-              className="w-full bg-transparent border-b border-gray-300 text-white placeholder-gray-200 md:py-2 focus:outline-none"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+              className={`w-full bg-transparent border-b border-gray-300 text-white placeholder-white py-2 focus:outline-none focus:border-white ${
+                formik.touched.email && formik.errors.email
+                  ? "border-red-400"
+                  : ""
+              }`}
             />
+            {formik.touched.email && formik.errors.email ? (
+              <div className="text-red-300 text-xs mt-1">
+                {formik.errors.email}
+              </div>
+            ) : null}
           </div>
 
-          <div className="w-full max-w-sm">
+          {/* Password Input */}
+          <div className="relative w-full pt-5 md:pt-0">
             <input
-              type="text"
-              placeholder="Username"
-              className="w-full bg-transparent border-b border-gray-300 text-white placeholder-gray-200 md:py-2 focus:outline-none"
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+              className={`w-full bg-transparent border-b border-gray-300 text-white placeholder-white py-2 focus:outline-none focus:border-white ${
+                formik.touched.password && formik.errors.password
+                  ? "border-red-400"
+                  : ""
+              }`}
             />
+            {formik.touched.password && formik.errors.password ? (
+              <div className="text-red-300 text-xs mt-1">
+                {formik.errors.password}
+              </div>
+            ) : null}
           </div>
 
-          <div className="pb-2 text-right">
+          <div className="text-right mt-2">
             <Link
               to="/forgot-password"
-              className="text-sm text-red-500 hover:underline"
+              className="text-sm text-white underline"
             >
               Forget Password?
             </Link>
           </div>
 
-          <div className="pt-5">
-            <Link
-              to="/login"
-              className="py-1 px-8 bg-white text-purple-600 font-bold md:py-2 md:px-16 rounded-full shadow-lg md:mt-8"
+          {/* LOGIN Button */}
+          <div className="flex flex-col items-center pt-4">
+            <button
+              type="submit"
+              disabled={formik.isSubmitting}
+              className="bg-white text-[#9577B5] font-bold py-1 px-8 rounded-full shadow-lg md:py-2 md:px-16"
             >
               LOGIN
-            </Link>
-          </div>
-
-          <span className="text-sm text-white font-semibold py-5">
-            Or Log in with
-          </span>
-
-          <div className="flex justify-center space-x-6">
-            <button>
-              <img src={facebook} alt="Twitter" className="size-6" />
-            </button>
-            <button>
-              <img src={twitter} alt="Twitter" className="size-6" />
-            </button>
-            <button>
-              <img src={google} alt="Google" className="size-6" />
             </button>
           </div>
-          <p className="text-center text-sm text-black">
-            Don’t have an Account? &nbsp;
-            <Link to="/signup" className="font-semibold text-white underline">
-              Register Now
-            </Link>
-          </p>
+        </form>
+
+        <span className="text-sm text-white font-semibold py-6">
+          Or Log in with
+        </span>
+
+        <div className="flex justify-center space-x-6">
+          <Link to="/">
+            <img src={facebook} alt="Twitter" className="size-6" />
+          </Link>
+          <Link to="/">
+            <img src={twitter} alt="Twitter" className="size-6" />
+          </Link>
+          <Link to="/">
+            <img src={google} alt="Google" className="size-6" />
+          </Link>
+        </div>
+        <div className="text-center text-sm text-black pb-12">
+          Don’t have an Account? &nbsp;
+          <Link to="/signup" className="font-semibold text-white underline">
+            Register Now
+          </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }

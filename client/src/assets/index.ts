@@ -35,9 +35,11 @@ import slide32 from "./Images/slide32.svg";
 import slide33 from "./Images/slide33.svg";
 import slide34 from "./Images/slide34.svg";
 import slide35 from "./Images/slide35.svg";
+import slide36 from "./Images/slide36.svg";
 import facebook from "./Images/facebook.svg";
 import google from "./Images/google.svg";
 import twitter from "./Images/twitter.svg";
+import location from "./Images/location.svg";
 
 export {
   twitter,
@@ -80,4 +82,6 @@ export {
   slide33,
   slide34,
   slide35,
+  slide36,
+  location,
 };
