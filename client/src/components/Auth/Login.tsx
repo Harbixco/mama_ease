@@ -30,7 +30,7 @@ export default function Login() {
   });
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col md:h-screen">
       {/* Top Section (White) */}
       <div className="flex flex-col items-center pt-4 pb-4 bg-white">
         <img src={logo} alt="MamaEase Logo" className="size-12 md:size-20" />
@@ -38,10 +38,10 @@ export default function Login() {
       </div>
 
       {/* Bottom Section (Purple) */}
-      <div className="flex-1 bg-[#9577B5] flex flex-col items-center justify-start py-8 px-6">
+      <div className="flex-1 bg-[#9577B5] flex flex-col items-center justify-start py-4 md:py-8 px-6">
         <form
           onSubmit={formik.handleSubmit}
-          className="w-full max-w-sm space-y-4"
+          className="w-full max-w-sm space-y-3 md:space-y-5"
         >
           {/* Email Input */}
           <div className="relative w-full">
@@ -67,7 +67,7 @@ export default function Login() {
           </div>
 
           {/* Password Input */}
-          <div className="relative w-full pt-5 md:pt-0">
+          <div className="relative w-full md:pt-0">
             <input
               id="password"
               name="password"
@@ -110,6 +110,7 @@ export default function Login() {
           </div>
         </form>
 
+        {/* <div className="> */}
         <span className="text-sm text-white font-semibold py-6">
           Or Log in with
         </span>
@@ -125,12 +126,13 @@ export default function Login() {
             <img src={google} alt="Google" className="size-6" />
           </Link>
         </div>
-        <div className="text-center text-sm text-black pb-12">
+        <div className="text-center text-sm text-black py-8 md:py-0 md:pt-8">
           Don’t have an Account? &nbsp;
           <Link to="/signup" className="font-semibold text-white underline">
             Register Now
           </Link>
         </div>
+        {/* </div> */}
       </div>
     </div>
   );
